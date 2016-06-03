@@ -21,6 +21,7 @@ Some guidelines and tips:
 OK, here we go.
 
 # Title of my project
+# CRISPR gRNA seq search
 
 ## Introduction and Goals
 
