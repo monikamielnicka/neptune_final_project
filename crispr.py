@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
-gRNAseq = raw_input ('input gRNA sequence')
-print(gRNAseq)
+#dictionary
 
+from Bio import SeqIO
+
+Seaurchin_dict = SeqIO.to_dict(SeqIO.parse('seaurchinscaffolds.fa','fasta'))
+print(Seaurchin_dict.keys())
