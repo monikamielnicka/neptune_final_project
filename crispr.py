@@ -17,39 +17,53 @@ output_handle.close()
 '''
 #PAM finder + 20nt
 #new_sequences = raw_input ('enter DNA for gRNA scan: ')
+
 new_sequences = 'ACTAAGTACTGAGCTACTCCTAGAGACGCGCCGAAAAGAACTGTACGGACTGTAGCCACCCTATGACGTC'
 
 OutFile = open('NGG_gRNA', 'w')
 
 for m in re.finditer('[ATGC]GG', new_sequences): 
-	OutFile.write('NGG PAM found '+ str(m.start())+ str(m.end()) + new_sequences[m.start()-20:m.end()])
-	print('NGG PAM found', m.start(), m.end()) 
-
-#if len(new_sequences)-m.start() > 20:
-	print(new_sequences[m.start()-20:m.end()]) 
 	
-#else:
-	#print('NGG no valid sequence match')  
+	OutFile.write('>location_in_search_query|'+ str(m.start()) + '|' + str(m.end()) + '|' + '\n' + new_sequences[m.start()-20:m.end()] + '\n')
+	
+	print('NGG PAM found', m.start(), m.end()) 
+	
+	print(new_sequences[m.start()-20:m.end()]) 
+
+OutFile.close()
+
+
+OutFile = open('CCN_gRNA', 'w')
+
 
 for m in re.finditer('CC[ATGC]', new_sequences): 
-	OutFile.write('CCN PAM found '+ str(m.start())+ str(m.end()) + new_sequences[m.start()-20:m.end()])
+	
+	OutFile.write('>location_in_search_query|'+ str(m.start()) + '|' + str(m.end()) + '|' + '\n' + new_sequences[m.start():m.end()+20] + '\n')
+	
 	print('CCN PAM found', m.start(), m.end()) 
-#if len(new_sequences)-m.end() > 20:	
+	
 	print(new_sequences[m.start():m.end()+20])
 
-#else: 	
-	#print('CCN no valid sequence match')
 
 OutFile.close()
 
 #PAM BLAST - this finds the blast sequence with maximum 15/20 mismatches 
 
+from Bio.Blast.Applications import NcbiblastnCommandline
+help(NcbiblastnCommandline)
+
+blastn_cline = NcbiblastnCommandline(query='CCN_gRNA', db='sp_purpuratus', evalue=0.001, outfmt=5, out='gRNA_aligments')
+
+blastn_cline
+
+NcbiblastnCommandline(cmd='blastn', out='gRNA_aligments', outfmt=5, query='CCN_gRNA', db='sp_purpuratus', evalue=0.001)
+
+print(blastn_cline)
+
+blastn -out gRNA_aligments -outfmt 5 -query CCN_gRNA -db purple sea urchin -evalue 0.001
+
+stdout, stderr = blastn_cline()
+
+
 #pat = re.compile ('[ATGC]CC')
 #match = pat.search (new_sequences)
-'''
-how to find all occurnces
-if len(new_sequences)-match.start() < 20:
-	continue
-else:
-	print()
-'''
