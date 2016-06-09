@@ -27,7 +27,6 @@ for m in re.finditer('[ATGC]CC', new_sequences):
          
 
 
-
 '''
 how to find all occurnces
 if len(new_sequences)-match.start() < 20:
