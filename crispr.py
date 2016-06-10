@@ -15,7 +15,7 @@ from Bio.Blast import NCBIXML
 # optional: shows the scaffolds and nt positions of desired PAM seq search - takes time to load. 
 # saves the result to file
 
-'''
+
 Seaurchin_dict = SeqIO.to_dict(SeqIO.parse('seaurchinscaffolds.fa','fasta'))
 sequences = (Seaurchin_dict['Scaffold670'] [107780:107850])
 
@@ -53,7 +53,7 @@ for m in re.finditer('CC[ATGC]', new_sequences):
 	print('CCN PAM found', m.start(), m.end()) 
 
 	print(new_sequences[m.start():m.end()+20])
-'''
+
 # the blast search entrez_query for sea urchin (see ORGN number on online blast if in doubt)
 # to add extra features to search go to entrez BLAST NCBI webpage
 # format_type set to a text file for convenience
