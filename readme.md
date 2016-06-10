@@ -7,6 +7,8 @@
 
 The goal is to create a tool for gRNA search in purple sea urchin: 
 
+![CRISPRpic.jpg](CRISPRpic.jpg)
+
 The program features include: library of sea urchin genomic scaffold from which you can download a desired sequence for PAM sequence search.
 
 The tool marks the start and end sites of PAM sequence, within the desired sequence. It does for both forward and reverse strand. It also isolates 20 nt streach of nt for gRNA sequence and generate both gRNA and PAM sequence into fasta file.
