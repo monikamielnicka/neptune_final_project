@@ -15,7 +15,7 @@ from Bio.Blast import NCBIXML
 # optional: shows the scaffolds and nt positions of desired PAM seq search - takes time to load. 
 # saves the result to file
 
-
+'''
 Seaurchin_dict = SeqIO.to_dict(SeqIO.parse('seaurchinscaffolds.fa','fasta'))
 sequences = (Seaurchin_dict['Scaffold670'] [107780:107850])
 
@@ -53,17 +53,19 @@ for m in re.finditer('CC[ATGC]', new_sequences):
 	print('CCN PAM found', m.start(), m.end()) 
 
 	print(new_sequences[m.start():m.end()+20])
-
+'''
 # the blast search entrez_query for sea urchin (see ORGN number on online blast if in doubt)
 # to add extra features to search go to entrez BLAST NCBI webpage
 # format_type set to a text file for convenience
 # add one fasta per quert to the blast search if have multipe gRNA aligments
 
 record = SeqIO.read("gRNA_searchfile", format="fasta")
-result_handle = NCBIWWW.qblast('blastn', 'nt', record.seq, entrez_query='txid7668[ORGN]', format_type='Text')
+result_handle = NCBIWWW.qblast('blastn', 'nt', record.seq, entrez_query='txid7668[ORGN]', format_type='Text', expect=100.0)
 #print (result_handle)
 
 save_file = open('magic_blast', 'w')
 save_file.write(result_handle.read())
 save_file.close()
 result_handle.close()
+
+#to search results open wildcards (Identities\s.\snumber.+)
